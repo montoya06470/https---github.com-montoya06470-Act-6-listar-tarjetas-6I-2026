@@ -1,122 +1,121 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Coffee App',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primarySwatch: Colors.brown,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const LosProductos(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class LosProductos extends StatelessWidget {
+  const LosProductos({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: const Text('Caffenio la Montoya'),
+        centerTitle: true,
+        backgroundColor: Colors.red,
+        foregroundColor: Colors.white,
+        leading: const Icon(Icons.coffee),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.build),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.emergency),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.camera_alt),
+            onPressed: () {},
+          ),
+        ],
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+      body: ListView(
+        padding: const EdgeInsets.all(16.0),
+        children: [
+          _crearTarjeta(
+            titulo: "Espresso Intenso",
+            subtitulo: "Energía pura",
+            urlImagen: "https://raw.githubusercontent.com/montoya06470/Imagenes-para-flutter-6to-I-fecha-11-feb-2026/refs/heads/main/cafe1.png",
+          ),
+          _crearTarjeta(
+            titulo: "Cappuccino",
+            subtitulo: "Cremoso y suave",
+            urlImagen: "https://raw.githubusercontent.com/montoya06470/Imagenes-para-flutter-6to-I-fecha-11-feb-2026/refs/heads/main/cafe2.png",
+          ),
+          _crearTarjeta(
+            titulo: "Latte Art",
+            subtitulo: "Diseño en tu taza",
+            urlImagen: "https://raw.githubusercontent.com/montoya06470/Imagenes-para-flutter-6to-I-fecha-11-feb-2026/refs/heads/main/cafe3.png",
+          ),
+          _crearTarjeta(
+            titulo: "Moka Frío",
+            subtitulo: "El toque de chocolate",
+            urlImagen: "https://raw.githubusercontent.com/montoya06470/Imagenes-para-flutter-6to-I-fecha-11-feb-2026/refs/heads/main/cafe4.png",
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _crearTarjeta({required String titulo, required String subtitulo, required String urlImagen}) {
+    return Card(
+      elevation: 8.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      margin: const EdgeInsets.only(bottom: 20.0),
+      color: const Color(0xFF6F4E37), // Lighter coffee color for card background
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(16.0),
+        leading: CircleAvatar(
+          radius: 30,
+          backgroundColor: Colors.brown.shade800,
+          child: ClipOval(
+            child: Image.network(
+              urlImagen,
+              width: 60,
+              height: 60,
+              fit: BoxFit.cover,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const Center(child: CircularProgressIndicator());
+              },
+              errorBuilder: (context, error, stackTrace) {
+                return const Icon(
+                  Icons.coffee,
+                  color: Colors.white,
+                  size: 30,
+                );
+              },
             ),
-          ],
+          ),
+        ),
+        title: Text(
+          titulo,
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          subtitulo,
+          style: const TextStyle(color: Colors.white70),
+        ),
+        trailing: const Icon(
+          Icons.thumb_up,
+          color: Color(0xFFFFF59D), // Amarillo claro
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
